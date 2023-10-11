@@ -6,15 +6,17 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 21:08:17 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/09 21:47:28 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:51:59 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
+int	ft_putchar(char c)
 {
-	write(1, &c, 1);
+	if (!write(1, &c, 1))
+		return (-1);
+	return (1);
 }
 
 int	ft_putstr(char *str)

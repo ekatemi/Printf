@@ -6,7 +6,7 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:16:34 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/09 23:02:50 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:48:04 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int print_formatted(char c, va_list arg_ptr);
 int ft_putstr(char *str);
+int ft_putnbr(int nb);
 
 int ft_printf(const char *format, ...)
 {
@@ -53,7 +54,7 @@ int print_formatted(char c, va_list arg_ptr)
 	}
 	else if (c == 'd' || c == 'i')
 	{
-		c = va_arg(arg_ptr, int)
+		c = va_arg(arg_ptr, int);
 		counter = counter + ft_putnbr(c);
 	}
 	return (counter);
@@ -63,6 +64,6 @@ int print_formatted(char c, va_list arg_ptr)
 
 int main(void)
 {
-	printf("Original  %s %c\n", "Katia", 'N');
-	ft_printf("Mine %s %c", "Katia", 'N');
+	printf("Original  %s %c %d %i\n", "Katia", 'N', 123, -123);
+	ft_printf("Mine %s %c %d %i", "Katia", 'N', 123, -123);
 }
