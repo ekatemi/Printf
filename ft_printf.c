@@ -6,17 +6,19 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:16:34 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/11 20:48:04 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:57:58 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <limits.h>
 
 int print_formatted(char c, va_list arg_ptr);
 int ft_putstr(char *str);
-int ft_putnbr(int nb);
+int ft_putnbr(int n);
+int ft_putnbru(unsigned int n);
 
 int ft_printf(const char *format, ...)
 {
@@ -57,6 +59,14 @@ int print_formatted(char c, va_list arg_ptr)
 		c = va_arg(arg_ptr, int);
 		counter = counter + ft_putnbr(c);
 	}
+	else if (c == 'u')
+	{
+		c = va_arg(arg_ptr, unsigned int);
+		counter = counter + ft_putnbru(c);
+	}
+	else if (c == 'x')
+		c = va_arg(arg_ptr, int);
+		counter += ft_putnbrhex(c, base);
 	return (counter);
 }
 
@@ -64,6 +74,6 @@ int print_formatted(char c, va_list arg_ptr)
 
 int main(void)
 {
-	printf("Original  %s %c %d %i\n", "Katia", 'N', 123, -123);
-	ft_printf("Mine %s %c %d %i", "Katia", 'N', 123, -123);
+	printf("Original  %s %c %d %i %u\n", "Katia", 'N', 123, -123, UINT_MAX);
+	ft_printf("Mine %s %c %d %i %u", "Katia", 'N', 123, -123, 4294967295);
 }
