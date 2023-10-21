@@ -6,55 +6,60 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:59:07 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/21 20:51:39 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:18:06 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-static  int ft_strlen(char *str)
+
+static int	ft_strlen(char *str)
 {
-    int len;
-    
-    len = 0;
-    while(*str++)
-    {
-        len++;
-    }
-    return len;
+	int	len;
+
+	len = 0;
+	while (*str++)
+		len++;
+	return (len);
 }
 
-int ft_putnbrhex(unsigned int n, char base)
+int	ft_putnbrhex(unsigned long n, char base)
 {
-    char hex[9];
-    int index;
-    int reminder;
-    int i;
-    
-    
-    index = 0;
-    if (n == 0)
-        return (write(1, "0", 1));
-    while (n != 0)
-    {
-        reminder = n % 16;
-            if (reminder <= 9)
-                hex[index++] = reminder + 48;
-            else
-                if (base == 'X')
-                    hex[index++] = reminder - 10 + 'A';
-                else if(base == 'x')
-                    hex[index++] = reminder - 10 + 'a';
-        n = n / 16;
-    }
-    hex[index] = '\0';
-    i = index - 1;
-    while (i >= 0)
-        write(1, &hex[i--], 1);
+	char	hex[17];
+	int		index;
+	int		reminder;
+	int		i;
 
-    return ft_strlen(hex);
+	index = 0;
+	if (n == 0)
+		return (write(1, "0", 1));
+	while (n != 0)
+	{
+		reminder = n % 16;
+		if (reminder <= 9)
+			hex[index++] = reminder + 48;
+		else
+		{
+			if (base == 'X')
+				hex[index++] = reminder - 10 + 'A';
+			else if (base == 'x')
+				hex[index++] = reminder - 10 + 'a';
+		}
+		n = n / 16;
+	}
+	hex[index] = '\0';
+	i = index - 1;
+	while (i >= 0)
+		write(1, &hex[i--], 1);
+	return (ft_strlen(hex));
 }
+
+int	ft_putptr(unsigned long n)
+{
+	return (write(1, "0x", 2) + ft_putnbrhex((unsigned long)n, 'x'));
+}
+
 /*
 int main()
 {

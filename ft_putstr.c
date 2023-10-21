@@ -6,7 +6,7 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 21:08:17 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/11 20:51:59 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:20:38 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_putchar(char c)
 
 int	ft_putstr(char *str)
 {
-	int counter;
+	int	counter;
 
 	counter = 0;
 	while (*str)
