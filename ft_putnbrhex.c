@@ -6,14 +6,14 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:59:07 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/12 19:59:11 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:51:39 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-int ft_strlen(char *str)
+static  int ft_strlen(char *str)
 {
     int len;
     
@@ -35,11 +35,7 @@ int ft_putnbrhex(unsigned int n, char base)
     
     index = 0;
     if (n == 0)
-    {
-        write(1, "0", 1);
-        return 1;
-    }
-    
+        return (write(1, "0", 1));
     while (n != 0)
     {
         reminder = n % 16;
@@ -59,15 +55,15 @@ int ft_putnbrhex(unsigned int n, char base)
 
     return ft_strlen(hex);
 }
-
+/*
 int main()
 {
     ft_putnbrhex(-123, 'x');
     printf("\n");
     ft_putnbrhex(-123, 'X');
-    printf("\n%x", -123);
-    printf("\n%X\n", -123);
-    int n = ft_putnbrhex(-123, 'X');
-    printf("\n%d", n);
+    printf("\n original %x", -123);
+    printf("\n original %X\n", -123);
+    //int n = ft_putnbrhex(-123, 'X');
+   // printf("\n%d", n);
     return 0;
-}
+}*/

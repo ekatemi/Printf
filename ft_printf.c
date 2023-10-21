@@ -6,7 +6,7 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:16:34 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/12 19:57:58 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/21 21:09:49 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int ft_putstr(char *str);
 int ft_putnbr(int n);
 int ft_putnbru(unsigned int n);
 int ft_putnbrhex(unsigned int n, char base);
+int ft_putchar(char c);
+
 
 int ft_printf(const char *format, ...)
 {
@@ -31,7 +33,7 @@ int ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format != '%')
-			counter = counter + write (1, format, 1);
+			counter += write (1, format, 1);
 		else 
 			counter = counter + print_formatted(*(++format), arg_ptr);
 	format++;
@@ -43,31 +45,30 @@ int ft_printf(const char *format, ...)
 int print_formatted(char c, va_list arg_ptr)
 {
 	int counter;
+	char  alpha;
 
 	counter = 0;
 	if (c == 'c')
 	{
-		c = va_arg(arg_ptr, int);
-		counter += write(1, &c, 1);
+		alpha = (char)va_arg(arg_ptr, int);
+		counter += ft_putchar(alpha);
 	}
 	else if (c == 's')
 	{
-		char *str = va_arg(arg_ptr, char *);
-		counter += ft_putstr(str);
+		counter += ft_putstr(va_arg(arg_ptr, char *));
 	}
 	else if (c == 'd' || c == 'i')
 	{
-		c = va_arg(arg_ptr, int);
-		counter += ft_putnbr(c);
+		counter += ft_putnbr(va_arg(arg_ptr, int));
 	}
 	else if (c == 'u')
 	{
-		c = va_arg(arg_ptr, unsigned int);
-		counter += ft_putnbru(c);
+		counter += ft_putnbru(va_arg(arg_ptr, unsigned int));
 	}
 	else if (c == 'x' || c == 'X')
-		c = va_arg(arg_ptr, unsigned int);
-		counter += ft_putnbrhex(c, base);
+		counter += ft_putnbrhex(va_arg(arg_ptr, unsigned int), c);
+	else if (c == '%')
+		counter += ft_putchar('%');
 	return (counter);
 }
 
@@ -75,6 +76,11 @@ int print_formatted(char c, va_list arg_ptr)
 
 int main(void)
 {
-	printf("Original  %s %c %d %i %u %x %X\n", "Katia", 'N', 123, -123, UINT_MAX, 1234567, 1234567);
-	ft_printf("Mine %s %c %d %i %u %x %x", "Katia", 'N', 123, -123, 4294967295, 1234567, 1234567);
+	printf("Original: \n	character %c\n	string %s\n	integer %d %i\n	unsigned int %u\n	hexadec %x %X %%\n	end of format", 'a', "Katia", 54 , -54, 258, 123456, 123456);
+	printf("\n");
+	ft_printf("Mine: \n	character %c\n	string %s\n	integer %d %i\n	unsigned int %u\n	hexadec %x %X %%\n	end of format", 'a', "Katia", 54 , -54, 258, 123456, 123456);
+
+	int i = 3;
+	int *ptr = &i;
+	ft_printf("%p", ptr);
 }
