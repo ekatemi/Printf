@@ -12,13 +12,14 @@
 
 #include <stdarg.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <limits.h>
+#include <unistd.h>
 
 int print_formatted(char c, va_list arg_ptr);
 int ft_putstr(char *str);
 int ft_putnbr(int n);
 int ft_putnbru(unsigned int n);
+int ft_putnbrhex(unsigned int n, char base);
 
 int ft_printf(const char *format, ...)
 {
@@ -47,25 +48,25 @@ int print_formatted(char c, va_list arg_ptr)
 	if (c == 'c')
 	{
 		c = va_arg(arg_ptr, int);
-		counter = counter + write(1, &c, 1);
+		counter += write(1, &c, 1);
 	}
 	else if (c == 's')
 	{
 		char *str = va_arg(arg_ptr, char *);
-		counter = counter + ft_putstr(str);
+		counter += ft_putstr(str);
 	}
 	else if (c == 'd' || c == 'i')
 	{
 		c = va_arg(arg_ptr, int);
-		counter = counter + ft_putnbr(c);
+		counter += ft_putnbr(c);
 	}
 	else if (c == 'u')
 	{
 		c = va_arg(arg_ptr, unsigned int);
-		counter = counter + ft_putnbru(c);
+		counter += ft_putnbru(c);
 	}
-	else if (c == 'x')
-		c = va_arg(arg_ptr, int);
+	else if (c == 'x' || c == 'X')
+		c = va_arg(arg_ptr, unsigned int);
 		counter += ft_putnbrhex(c, base);
 	return (counter);
 }
@@ -74,6 +75,6 @@ int print_formatted(char c, va_list arg_ptr)
 
 int main(void)
 {
-	printf("Original  %s %c %d %i %u\n", "Katia", 'N', 123, -123, UINT_MAX);
-	ft_printf("Mine %s %c %d %i %u", "Katia", 'N', 123, -123, 4294967295);
+	printf("Original  %s %c %d %i %u %x %X\n", "Katia", 'N', 123, -123, UINT_MAX, 1234567, 1234567);
+	ft_printf("Mine %s %c %d %i %u %x %x", "Katia", 'N', 123, -123, 4294967295, 1234567, 1234567);
 }
