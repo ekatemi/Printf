@@ -6,7 +6,7 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:16:34 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/24 19:00:21 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:26:55 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,26 @@ int	ft_printf(const char	*format, ...)
 {
 	va_list	arg_ptr;
 	int		counter;
+	int     ret;
 
 	va_start(arg_ptr, format);
 	counter = 0;
 	while (*format)
 	{
 		if (*format != '%')
-			counter += write (1, format, 1);
+		{
+		  	ret = write (1, format, 1);
+			if(ret == -1)
+				return(-1);
+			counter += ret;
+		}
 		else
-			counter = counter + print_formatted(*(++format), arg_ptr);
+		{
+			ret = print_formatted(*(++format), arg_ptr);
+			if(ret == -1)
+				return(-1);
+			counter += ret;
+		}
 		format++;
 	}
 	va_end(arg_ptr);
@@ -40,20 +51,20 @@ int	print_formatted(char c, va_list arg_ptr)
 	if (c == 'c')
 	{
 		alpha = (char)va_arg(arg_ptr, int);
-		counter += ft_putchar(alpha);
+		counter = ft_putchar(alpha);
 	}
 	else if (c == 's')
-		counter += ft_putstr(va_arg(arg_ptr, char *));
+		counter = ft_putstr(va_arg(arg_ptr, char *));
 	else if (c == 'd' || c == 'i')
-		counter += ft_putnbr(va_arg(arg_ptr, int));
+		counter = ft_putnbr(va_arg(arg_ptr, int));
 	else if (c == 'u')
-		counter += ft_putnbru(va_arg(arg_ptr, unsigned int));
+		counter = ft_putnbru(va_arg(arg_ptr, unsigned int));
 	else if (c == 'x' || c == 'X')
-		counter += ft_putnbrhex(va_arg(arg_ptr, unsigned int), c);
+		counter = ft_putnbrhex(va_arg(arg_ptr, unsigned int), c);
 	else if (c == 'p')
-		counter += ft_putptr(va_arg(arg_ptr, unsigned long long));
+		counter = ft_putptr(va_arg(arg_ptr, unsigned long long));
 	else if (c == '%')
-		counter += ft_putchar(c);
+		counter = ft_putchar(c);
 	return (counter);
 }
 /*

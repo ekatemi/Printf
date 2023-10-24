@@ -6,7 +6,7 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:59:07 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/21 23:18:06 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:37:50 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,21 @@ int	ft_putnbrhex(unsigned long n, char base)
 	hex[index] = '\0';
 	i = index - 1;
 	while (i >= 0)
-		write(1, &hex[i--], 1);
+	{
+		if (write(1, &hex[i--], 1) == -1)
+			return(-1);
+	}
 	return (ft_strlen(hex));
 }
 
 int	ft_putptr(unsigned long n)
 {
-	return (write(1, "0x", 2) + ft_putnbrhex((unsigned long)n, 'x'));
+	int ret;
+
+	ret = write(1, "0x", 2);
+	if (ret == -1)
+		return(-1);
+	return (ret + ft_putnbrhex((unsigned long)n, 'x'));
 }
 
 /*
