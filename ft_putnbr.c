@@ -6,7 +6,7 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 19:35:57 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/11 20:40:38 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:37:12 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int num_size(int num)
 {
   int len = 0;
-  if (num < 0)
+  if (num <= 0)
     {
       len++;
       num = -num;

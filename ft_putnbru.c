@@ -6,7 +6,7 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:05:55 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/21 23:26:50 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:40:57 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	num_size(unsigned int num)
 	int	len;
 
 	len = 0;
+	if (num <= 0)
+		num++;
 	while (num != 0)
 	{
 		num = num / 10;
