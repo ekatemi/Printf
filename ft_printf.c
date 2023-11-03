@@ -6,11 +6,19 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:16:34 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/10/24 22:16:02 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/11/03 20:32:05 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+int check_ret(int ret)
+{
+	if (ret == -1)
+		return (-1);
+	return (0);
+}*/
 
 int	ft_printf(const char	*format, ...)
 {
@@ -24,10 +32,9 @@ int	ft_printf(const char	*format, ...)
 	{
 		if (*format != '%')
 		{
-			ret = write (1, format, 1);
-			if (ret == -1)
+			if (write (1, format, 1) == -1)
 				return (-1);
-			counter += ret;
+			counter++;
 		}
 		else
 		{
