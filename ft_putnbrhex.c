@@ -6,7 +6,7 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:59:07 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/11/03 22:25:04 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/11/03 23:06:51 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int	ft_putnbrhex(unsigned long n, char base)
+static int	ft_hex_to_string(unsigned long n, char base, char *hex)
 {
-	char	hex[17];
-	int		index;
-	int		reminder;
-	int		i;
+	int	reminder;
+	int	index;
 
 	index = 0;
-	if (n == 0)
-		return (write(1, "0", 1));
 	while (n != 0)
 	{
 		reminder = n % 16;
@@ -38,6 +34,18 @@ int	ft_putnbrhex(unsigned long n, char base)
 		}
 		n = n / 16;
 	}
+	return (index);
+}
+
+int	ft_putnbrhex(unsigned long n, char base)
+{
+	char	hex[17];
+	int		index;
+	int		i;
+
+	if (n == 0)
+		return (write(1, "0", 1));
+	index = ft_hex_to_string(n, base, hex);
 	hex[index] = '\0';
 	i = index - 1;
 	while (i >= 0)
