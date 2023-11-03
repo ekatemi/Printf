@@ -6,57 +6,65 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 19:35:57 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/11/03 22:00:40 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/11/03 20:50:07 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	ft_write_num(int nb)
+int	num_size(int num)
 {
-	int		temp;
-	int		digits;
-	int		i;
-	char	numero_arr[11];
+	int	len;
 
-	temp = nb;
-	digits = 1;
-	while (temp >= 10)
+	len = 0;
+	if (num <= 0)
 	{
-		temp = temp / 10;
-		digits++;
+		len++;
+		num = -num;
 	}
-	i = digits - 1;
-	while (i >= 0)
+	while (num != 0)
 	{
-		numero_arr[i] = nb % 10 + '0';
-		nb = nb / 10;
-		i--;
+		num = num / 10;
+		len++;
 	}
-	return (write (1, numero_arr, digits));
+	return (len);
 }
 
-int	ft_putnbr(int nb)
+int	ft_putnbr(int n)
 {
-	int	counter;
+	int		x;
+	char	digit;
 
-	counter = 0;
-	if (nb < 0 && nb != -2147483648)
-	{
-		if (write(1, "-", 1) == -1)
-			return (-1);
-		nb = -nb;
-		counter += 1;
-	}
-	if (nb == -2147483648)
+	x = n;
+	if (n == -2147483648)
 	{
 		if (write(1, "-2", 2) == -1)
 			return (-1);
-		nb = 147483648;
-		counter += 2;
+		n = 147483648;
 	}
-	return (counter + ft_write_num(nb));
+	if (n < 0)
+	{
+		if (write(1, "-", 1) == -1)
+			return (-1);
+		n = -n;
+	}
+	if (n >= 0 && n <= 9)
+	{
+		digit = n + '0';
+		if (write(1, &digit, 1) == -1)
+			return (-1);
+	}
+	else
+	{
+		if (ft_putnbr(n / 10) == -1)
+			return (-1);
+		digit = (n % 10) + '0';
+		if (write(1, &digit, 1) == -1)
+			return (-1);
+	}
+	return (num_size(x));
 }
+
 
 /*
 int main()
