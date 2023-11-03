@@ -6,13 +6,23 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:59:07 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/11/03 22:25:04 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:21:27 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+static int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (*str++)
+		len++;
+	return (len);
+}
 
 int	ft_putnbrhex(unsigned long n, char base)
 {
@@ -45,7 +55,7 @@ int	ft_putnbrhex(unsigned long n, char base)
 		if (write(1, &hex[i--], 1) == -1)
 			return (-1);
 	}
-	return (index);
+	return (ft_strlen(hex));
 }
 
 int	ft_putptr(unsigned long n)
