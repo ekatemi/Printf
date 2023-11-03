@@ -6,13 +6,11 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:59:07 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/11/03 23:06:51 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/11/03 23:18:26 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 static int	ft_hex_to_string(unsigned long n, char base, char *hex)
 {

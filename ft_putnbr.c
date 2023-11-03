@@ -6,13 +6,13 @@
 /*   By: emikhayl <emikhayl@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 19:35:57 by emikhayl          #+#    #+#             */
-/*   Updated: 2023/11/03 22:00:40 by emikhayl         ###   ########.fr       */
+/*   Updated: 2023/11/03 23:19:47 by emikhayl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	ft_write_num(int nb)
+static int	ft_write_num(int nb)
 {
 	int		temp;
 	int		digits;
